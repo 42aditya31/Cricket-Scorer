@@ -1,0 +1,49 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #e5989b;
+}
+
+#container {
+    background-color:#cad2c5;
+    padding: 20px;
+    border-radius: 15%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    width: 80%;
+    max-width: 400px;
+}
+
+#scoreboard {
+    margin-bottom: 20px;
+}
+
+#scoreboard p {
+    font-size: 24px;
+    margin: 10px 0;
+}
+
+#controls {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+
+#controls button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #b5838d;
+    color: white;
+}
+
+#controls button:hover {
+    background-color: #0056b3;
+}
