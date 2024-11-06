@@ -3,47 +3,56 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh;
     margin: 0;
-    background-color: #e5989b;
+    background-color: #fafafa;
 }
 
 #container {
-    background-color:#cad2c5;
-    padding: 20px;
-    border-radius: 15%;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    background-color: #f4f1de;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
     text-align: center;
-    width: 80%;
-    max-width: 400px;
+    width: 90%;
+    max-width: 500px;
 }
 
-#scoreboard {
-    margin-bottom: 20px;
-}
-
-#scoreboard p {
+header h1 {
     font-size: 24px;
-    margin: 10px 0;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.scoreboard p {
+    font-size: 20px;
+    margin: 8px 0;
+    color: #333;
 }
 
 #controls {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
     gap: 10px;
 }
 
 #controls button {
-    padding: 10px 20px;
+    padding: 10px;
     font-size: 16px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    background-color: #b5838d;
-    color: white;
+    background-color: #6a994e;
+    color: #fff;
+    transition: background-color 0.2s ease-in-out;
 }
 
 #controls button:hover {
-    background-color: #0056b3;
+    background-color: #386641;
+}
+
+@media (max-width: 480px) {
+    #controls {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
