@@ -4,83 +4,67 @@ let ball = 0;
 let wicket = 0;
 
 function updateScore() {
-  document.getElementById(
-    "Score_per_Wicket"
-  ).textContent = `Score / Wicket : ${runs} / ${wicket}`;
-  document.getElementById("CurrentOver").textContent = `CurrentOver : ${over}`;
-  document.getElementById("Ball").textContent = `Ball :  ${over} . ${ball}`;
- 
+    document.getElementById("Score_per_Wicket").textContent = `Score / Wicket: ${runs} / ${wicket}`;
+    document.getElementById("CurrentOver").textContent = `Current Over: ${over}`;
+    document.getElementById("Ball").textContent = `Ball: ${over}.${ball}`;
 }
 
-document.getElementById("run2").addEventListener("click", () => {
-  runs += 2;
-  ball += 1;
-  updateOverBall();
-});
-document.getElementById("run1").addEventListener("click", () => {
-  runs += 1;
-  ball += 1;
-  updateOverBall();
-});
-document.getElementById("run3").addEventListener("click", () => {
-  runs += 3;
-  ball += 1;
-  updateOverBall();
-});
-document.getElementById("run4").addEventListener("click", () => {
-  runs += 4;
-  ball += 1;
-  updateOverBall();
-});
-document.getElementById("run6").addEventListener("click", () => {
-  runs += 6;
-  ball += 1;
-  updateOverBall();
-});
-document.getElementById("dot-ball").addEventListener("click", () => {
-  ball += 1;
-  updateOverBall();
-});
-document.getElementById("wicket").addEventListener("click", () => {
-  wicket += 1;
-  ball += 1;
-  updateOverBall();
-});
-document.getElementById("wide_ball").addEventListener("click", () => {
-  runs += 1;
-  updateScore();
-});
-document.getElementById("no_ball").addEventListener("click", () => {
-  runs += 1;
-  updateScore();
-});
+document.getElementById("run1").addEventListener("click", () => addScore(1));
+document.getElementById("run2").addEventListener("click", () => addScore(2));
+document.getElementById("run3").addEventListener("click", () => addScore(3));
+document.getElementById("run4").addEventListener("click", () => addScore(4));
+document.getElementById("run6").addEventListener("click", () => addScore(6));
+document.getElementById("dot-ball").addEventListener("click", () => addBall());
+document.getElementById("wicket").addEventListener("click", () => addWicket());
+document.getElementById("wide_ball").addEventListener("click", () => addExtra(1));
+document.getElementById("no_ball").addEventListener("click", () => addExtra(1));
 
-function updateOverBall() {
-  if (ball == 6) {
-    ball = 0;
-    over += 1;
-  }
-  updateScore();
-  checkWicketsandOver()
- 
-  updateScore();
+function addScore(score) {
+    runs += score;
+    addBall();
 }
 
-function checkWicketsandOver() {
-  if (wicket === 10 || over === 4) {
-    document
-      .getElementById("container")
-      .insertAdjacentHTML(
-        "beforeend",
-        `<p id="myParagraph" >Team score ${runs} in ${over}.${ball} over with the loss of ${wicket} wickets </p>`
-      );
+function addExtra(extra) {
+    runs += extra;
+    updateScore();
+}
 
+function addBall() {
+    ball += 1;
+    if (ball === 6) {
+        ball = 0;
+        over += 1;
+    }
+    checkEndCondition();
+    updateScore();
+}
+
+function addWicket() {
+    wicket += 1;
+    addBall();
+}
+
+function checkEndCondition() {
+    if (wicket === 10 || over === 4) {
+        displaySummary();
+        resetScoreboard();
+    }
+}
+
+function displaySummary() {
+    const summary = document.createElement("p");
+    summary.id = "summary";
+    summary.textContent = `Final Score: ${runs} in ${over}.${ball} overs with ${wicket} wickets lost.`;
+    document.getElementById("container").appendChild(summary);
+}
+
+function resetScoreboard() {
     runs = 0;
     over = 0;
     ball = 0;
     wicket = 0;
-    
-  }
-};
-
-  
+    setTimeout(() => {
+        document.getElementById("summary").remove();
+        updateScore();
+    }, 3000);
+}
